@@ -8,11 +8,11 @@ class Solution {
 
         int result = 0;
         boolean odd = false;
-        for(int myChar: map.values()) {
-            if (myChar % 2 == 0) result += myChar;
+        for(int count: map.values()) {
+            if (count % 2 == 0) result += count;
             else {
                 odd = true;
-                result += myChar - 1;
+                result += count - 1;
             }
         }
         if (odd) result++;
