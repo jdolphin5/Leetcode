@@ -19,8 +19,8 @@ class Node {
 
 class Solution {
     public List<Integer> preorder(Node root) {
-        if (root == null) return null;
         List<Integer> result = new LinkedList();
+        if (root == null) return result;
         Stack<Node> stack = new Stack<Node>();
         stack.push(root);
 
