@@ -16,12 +16,12 @@ class Solution {
                 checkArr[m] = sArr[i+m];
             }
 
-            int[] checkArrMap = new int[26];
+            int[] checkArrCounts = new int[26];
             for (char c : checkArr) {
-                checkArrMap[c-'a']++;
+                checkArrCounts[c-'a']++;
             }
 
-            if (Arrays.equals(pArrCount, checkArrMap)) {
+            if (Arrays.equals(pArrCount, checkArrCounts)) {
                 result.add(i);
             }
         }
