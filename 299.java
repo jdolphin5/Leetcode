@@ -2,6 +2,8 @@ class Solution {
     public String getHint(String secret, String guess) {
         char[] secretArr = secret.toCharArray();
         char[] guessArr = guess.toCharArray();
+        int[] secretArrCount = new int[10];
+        int[] guessArrCount = new int[10];
 
         int secretCount = 0;
         int cowCount = 0;
@@ -10,27 +12,19 @@ class Solution {
             //secret matched
             if (secretArr[i] == guessArr[i]) {
                 secretCount++;
-                secretArr[i] = '\0';
-                guessArr[i] = '?';
+            }
+            else {
+                secretArrCount[secretArr[i]-'0']++;
+                guessArrCount[guessArr[i]-'0']++;
             }
         }
 
-        for (int i = 0; i < secretArr.length; i++) {
-            //check if any guesses match secret digits
-            //then set secret digits to null
-            for (int j = 0; j < guessArr.length; j++) {
-                if (guessArr[j] == secretArr[i]) {
-                    secretArr[i] = '\0';
-                    guessArr[j] = '?';
-                    cowCount++;
-                }
-            }
+        for (int i = 0; i < 10; i++) {
+            cowCount += Math.min(secretArrCount[i], guessArrCount[i]);
         }
 
-        String result = Integer.toString(secretCount) + 'A' + Integer.toString(cowCount) + 'B';
 
-
-        return result;
+        return secretCount + "A" + cowCount + "B";
 
     }
 }
