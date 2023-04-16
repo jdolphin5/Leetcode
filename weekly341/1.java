@@ -1,7 +1,6 @@
 class Solution {
     public int[] rowAndMaximumOnes(int[][] mat) {
         int rowCount = 0;
-        int lastOneIndex = 0;
         int maxRowCount = 0;
         int maxRowIndex = 0;
         
