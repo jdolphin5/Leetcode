@@ -22,7 +22,6 @@ class Solution {
             } else if (s.charAt(i) == ']') {
                 String temp = result.pop();
                 int repeat = counts.pop();
-                System.out.println(temp);
                 temp += res.repeat(repeat);
                 res = temp;
                 i++;
