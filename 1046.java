@@ -12,7 +12,6 @@ class Solution {
             y = pQueue.poll();
             if (!pQueue.isEmpty()) {
                 x = pQueue.poll();
-                System.out.println(x);
             }
             if (x == y) {
                 x = 0;
