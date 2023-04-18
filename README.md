@@ -1,2 +1,2 @@
 # leetcode
-leetcode problems
+Github repository for leetcode problems
