@@ -10,6 +10,7 @@
  */
 class Solution {
 
+    //change the pointer of node.next from the next node to the previous node
     private ListNode reversed(ListNode head) {
         ListNode prev = null;
         while (head != null) {
