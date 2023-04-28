@@ -10,8 +10,6 @@ class Solution {
             dp[i] = Math.max(dp[i-2] + nums[i], dp[i-1]);
         }
 
-        System.out.println(Arrays.toString(dp));
-
         return dp[nums.length-1];
     }
 }
