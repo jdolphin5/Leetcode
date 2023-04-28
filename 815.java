@@ -37,7 +37,7 @@ class Solution {
                     stop_bus.put(it,temp);
                 }
                 else{
-                    Set<Integer> temp =n ew HashSet<>();
+                    Set<Integer> temp = new HashSet<>();
                     temp.add(i);
                     stop_bus.put(it, temp);
                 }
