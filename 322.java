@@ -10,8 +10,8 @@ class Solution {
 
         int minCoinsChange = Integer.MAX_VALUE;
 
-        for (int num : coins) {
-            int curMinCoinsChange = helper(amount - num);
+        for (int coin : coins) {
+            int curMinCoinsChange = helper(amount - coin);
             if (curMinCoinsChange != -1) {
                 minCoinsChange = Math.min(curMinCoinsChange, minCoinsChange);
             }
