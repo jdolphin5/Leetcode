@@ -9,10 +9,12 @@ class Solution {
         int j = 0;
 
         while (j < s.length()) {
+
             while (mySet.contains(s.charAt(j))) {
                 mySet.remove(s.charAt(i));
                 i++;
             }
+            
             mySet.add(s.charAt(j));
             j++;
             maxLength = Math.max(maxLength, j - i);
