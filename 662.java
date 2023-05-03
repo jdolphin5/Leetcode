@@ -27,7 +27,7 @@ class Solution {
         while (!queue.isEmpty()) {
             int start = 0;
             int end = 0;
-            int size = queue.size();        
+            int size = queue.size();  //set number of items to operate on (one level of TreeNodes)      
 
             for (int i = 0; i < size; i++) {
                 TreeNode cur = queue.remove();
