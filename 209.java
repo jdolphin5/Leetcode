@@ -6,16 +6,15 @@ class Solution {
         int minLen = Integer.MAX_VALUE;
         boolean possible = false;
 
-        while (j < nums.length || sum >= target) {
-            if (sum < target) {
-                sum += nums[j];
-                j++;
-            } else {
-                minLen = Math.min(minLen, j-i);
+        while (j < nums.length) {
+            sum += nums[j];
+            while (sum >= target) {
+                minLen = Math.min(minLen, j-i+1);
                 possible = true;
                 sum -= nums[i];
                 i++;
             }
+            j++;
         }
 
         if (!possible) return 0;
