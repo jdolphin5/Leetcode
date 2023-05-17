@@ -8,7 +8,7 @@ class Solution {
             if (c == '|') {
                 pairCount++;
             }
-            if (c == '*' && pairCount % 2 == 0) {
+            else if (c == '*' && pairCount % 2 == 0) {
                 res++;
             }
         }
