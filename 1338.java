@@ -19,14 +19,9 @@ class Solution {
         Arrays.sort(freq);
         freq = reverse(freq);
         int i = 0;
-        while (i < freq.length && freq[i] > 0) {
-            if (count < size/2) {
-                count += freq[i];
-                i++;
-            } 
-            else {
-                break;
-            }
+        while (i < freq.length && freq[i] > 0 && count < size/2) {
+            count += freq[i];
+            i++;
         }
         return i;
     }
