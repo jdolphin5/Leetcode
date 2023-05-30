@@ -13,7 +13,7 @@ class Solution {
 
         for (int num : nums) {
             mySet.add(0);
-            List<Integer> myList = new ArrayList(); //list to store set in
+            List<Integer> myList = new ArrayList<>(); //list to store set in
             Iterator<Integer> iterator = mySet.iterator();
 
             while(iterator.hasNext()) {

@@ -1,7 +1,7 @@
 class Solution {
     public int[] rearrangeArray(int[] nums) {
-        List<Integer> posNums = new ArrayList();
-        List<Integer> negNums = new ArrayList();
+        List<Integer> posNums = new ArrayList<>();
+        List<Integer> negNums = new ArrayList<>();
 
         for (int val : nums) {
             if (val >= 0) {

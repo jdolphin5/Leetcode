@@ -69,7 +69,7 @@ class Solution {
     }
 
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
-        List<List<Integer>> result = new ArrayList();
+        List<List<Integer>> result = new ArrayList<>();
         int m = heights.length;
         int n = heights[0].length;
 
@@ -82,7 +82,7 @@ class Solution {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (pacific[i][j] == 2 && atlantic[i][j] == 2) {
-                    List<Integer> myList = new ArrayList();
+                    List<Integer> myList = new ArrayList<>();
                     myList.add(i);
                     myList.add(j);
                     result.add(myList);

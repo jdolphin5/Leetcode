@@ -9,13 +9,13 @@ class Solution {
             if (minDiff > currDiff) {
                 minDiff = currDiff;
                 result.clear();
-                List<Integer> myList = new ArrayList();
+                List<Integer> myList = new ArrayList<>();
                 myList.add(arr[i]);
                 myList.add(arr[i+1]);
                 result.add(myList);
             } 
             else if (minDiff == currDiff) {
-                List<Integer> myList = new ArrayList();
+                List<Integer> myList = new ArrayList<>();
                 myList.add(arr[i]);
                 myList.add(arr[i+1]);
                 result.add(myList);

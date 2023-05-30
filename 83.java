@@ -10,7 +10,7 @@
  */
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-        List<Integer> myList = new ArrayList();
+        List<Integer> myList = new ArrayList<>();
         ListNode cur = head;
         if (cur == null) return head;
         if (cur.next == null) return head;

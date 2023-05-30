@@ -8,9 +8,9 @@ class Solution {
          return a[0] - b[0];
         });
 
-        List<List<Integer>> result = new ArrayList();
+        List<List<Integer>> result = new ArrayList<>();
         for (int i = 0; i < intervals.length; i++) {
-            List<Integer> myList = new ArrayList();
+            List<Integer> myList = new ArrayList<>();
             myList.add(intervals[i][0]);
             myList.add(intervals[i][1]);
             for (int j = i+1; j < intervals.length; j++) {

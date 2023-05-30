@@ -1,7 +1,7 @@
 class Solution {
 
     private int find(int i, int[] graph) {
-        List<Integer> paths = new ArrayList();
+        List<Integer> paths = new ArrayList<>();
 
         //walk up to parent
         while (graph[i] > 0) {
