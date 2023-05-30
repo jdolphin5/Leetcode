@@ -13,12 +13,11 @@ class Solution {
 
     public int maxAreaOfIsland(int[][] grid) {
         int max = 0;
-        int area = 0;
 
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 if (grid[i][j] == 1) {
-                    max = Math.max(max, BFS(grid, i, j, area));
+                    max = Math.max(max, BFS(grid, i, j, 0));
                 }
             }
         }
