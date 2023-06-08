@@ -9,10 +9,7 @@ class Solution {
             }
             a /= 10;
         }
-        if (diff) {
-            return true;
-        }
-        return false;
+        return diff;
     }
 
     public int rotatedDigits(int n) {
