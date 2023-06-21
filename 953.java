@@ -5,10 +5,19 @@ class Solution {
             while (j < words[i-1].length() || j < words[i].length()) {
                 int a;
                 int b;
-                if (j < words[i-1].length()) a = 1+order.indexOf(words[i-1].charAt(j));
-                else a = 0;
-                if (j < words[i].length()) b = 1+order.indexOf(words[i].charAt(j));
-                else b = 0;
+                if (j < words[i-1].length()) {
+                    a = 1+order.indexOf(words[i-1].charAt(j));
+                }
+                else {
+                    a = 0;
+                }
+                if (j < words[i].length()) {
+                    b = 1+order.indexOf(words[i].charAt(j));
+                }
+                else {
+                    b = 0;
+                }
+                    
                 if (b > a) {
                     // good
                     break;
