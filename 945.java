@@ -4,9 +4,10 @@ class Solution {
         int last = -1;
         int ret = 0;
         for (int i = 1; i < nums.length; i++) {
-            while (nums[i] <= nums[i-1]) {
-                nums[i]++;
-                ret++;
+            if (nums[i] <= nums[i-1]) {
+                int diff = nums[i-1] - nums[i];
+                nums[i] += diff + 1;
+                ret += diff + 1;
             }
         }
         return ret;
