@@ -10,22 +10,23 @@ class Solution {
             }
         }
         for (int i = 0; i < queries.length; i++) {
-            if (isEven[queries[i][1]])
-                sum -= nums[queries[i][1]];
+            int queryIndex = queries[i][1];
+            int queryVal = queries[i][0];
+            if (isEven[queryIndex])
+                sum -= nums[queryIndex];
             boolean queryEven = false;
-            if (queries[i][0] % 2 == 0) {
+            if (queryVal % 2 == 0) {
                 queryEven = true;
             }
-            nums[queries[i][1]] += queries[i][0];
-            if ((queryEven && isEven[queries[i][1]]) || (!queryEven && !isEven[queries[i][1]])) {
-                sum += nums[queries[i][1]];
-                isEven[queries[i][1]] = true;
+            nums[queryIndex] += queryVal;
+            if ((queryEven && isEven[queryIndex]) || (!queryEven && !isEven[queryIndex])) {
+                sum += nums[queryIndex];
+                isEven[queryIndex] = true;
             }
             else {
-                isEven[queries[i][1]] = false;
+                isEven[queryIndex] = false;
             }
             answer[i] = sum;
-            //System.out.println(Arrays.toString(nums));
         }
         return answer;
     }
