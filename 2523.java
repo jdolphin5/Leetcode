@@ -12,7 +12,7 @@ class Solution {
     }
 
     public int[] closestPrimes(int left, int right) {
-        boolean[] isPrime = isPrime = sieve(right);
+        boolean[] isPrime = sieve(right);
         List<Integer> primeList = new ArrayList<>();
         int minDiff = Integer.MAX_VALUE;
         int[] result = new int[2];
