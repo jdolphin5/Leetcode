@@ -22,22 +22,22 @@ class Solution {
         int left = 0;
         int right = 0;
         if (root.left != null) {
-            left = dfs2(root.left, 0, root.val);
+            left = dfs2(root.left, root.val);
         }
         if (root.right != null) {
-            right = dfs2(root.right, 0, root.val);
+            right = dfs2(root.right, root.val);
         }
         max = Math.max(max, left + right);
     }
 
-    private int dfs2(TreeNode root, int len, int curVal) {
+    private int dfs2(TreeNode root, int curVal) {
         if (root.val == curVal) {
             int left = 0;
             int right = 0;
             if (root.left != null) 
-                left = dfs2(root.left, len, curVal);
+                left = dfs2(root.left, curVal);
             if (root.right != null) 
-                right = dfs2(root.right, len, curVal);
+                right = dfs2(root.right, curVal);
             return 1 + Math.max(left, right);
         }
         return 0;
