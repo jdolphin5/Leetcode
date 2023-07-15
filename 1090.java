@@ -3,8 +3,8 @@ class Solution {
 
         int ret = 0;
         PriorityQueue<Pair<Integer, Integer>> pq = new PriorityQueue<>((a,b) -> b.getKey() - a.getKey());
-        int[] labelBucket = new int[1000001];
-        
+        int[] labelBucket = new int[20001]; //(2 * 10^4) + 1
+
         for (int i = 0; i < values.length; i++) {
             Pair<Integer, Integer> myPair = new Pair(values[i], labels[i]);
             pq.offer(myPair);
