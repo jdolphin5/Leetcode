@@ -1,38 +1,27 @@
 class Solution {
-    int[] coins;
-    Integer[] cache;
 
-    private int helper(int amount) {
-        if (amount == 0) return 0;
-        if (amount < 0) return -1;
-
-        if (cache[amount] != null) return cache[amount];
-
-        int minCoinsChange = Integer.MAX_VALUE;
-
-        for (int coin : coins) {
-            int curMinCoinsChange = helper(amount - coin);
-            if (curMinCoinsChange != -1) {
-                minCoinsChange = Math.min(curMinCoinsChange, minCoinsChange);
-            }
+    private int helper(int[] coins, int[][] dp, int cur, int i) {
+        //System.out.println(" cur: " + cur + " i: " + i);
+        if (i == coins.length-1) {
+            if (cur % coins[i] == 0) return cur / coins[i];
+            else return 50000;
         }
-
-        if (minCoinsChange == Integer.MAX_VALUE) {
-            minCoinsChange = -1;
+        if (dp[i][cur] != -1) {
+            return dp[i][cur];
         }
-        else {
-            minCoinsChange += 1;
+        int a = 50000;
+        if (coins[i] <= cur) {
+            a = 1 + helper(coins, dp, cur-coins[i], i);
         }
-
-        cache[amount] = minCoinsChange;
-        return cache[amount];
-
+        int b = helper(coins, dp, cur, i+1);
+        return dp[i][cur] = Math.min(a, b);
+        
     }
 
     public int coinChange(int[] coins, int amount) {
-        this.coins = coins;
-        this.cache = new Integer[amount + 1];
-        return helper(amount);
+        int[][] dp = new int[coins.length][amount+1];
+        for(int[] arr : dp) Arrays.fill(arr, -1);
+        int ret = helper(coins, dp, amount, 0);
+        return ret != 50000 ? ret : -1;
     }
-
 }
