@@ -13,8 +13,9 @@ class Solution {
     
     public int[] shuffle() {
         int n = shuffleNums.length;
+        Random rand = new Random();
         for (int i = 0; i < n; i++) {
-            int randomNum = new Random().nextInt(n);
+            int randomNum = rand.nextInt(n);
             int temp = shuffleNums[i];
             shuffleNums[i] = shuffleNums[randomNum];
             shuffleNums[randomNum] = temp;
