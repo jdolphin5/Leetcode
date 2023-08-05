@@ -1,6 +1,7 @@
 class Solution {
     public int findLongestChain(int[][] pairs) {
         int count = 0;
+        //sort pq by lowest second value in the pair (i.e. [a, b] - sort by b in asc order)
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] * 1000 + a[0] - b[1] * 1000 - b[0]);
         for (int[] onePair : pairs) {
             pq.offer(onePair);
