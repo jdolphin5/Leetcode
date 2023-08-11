@@ -1,24 +1,32 @@
 class Solution {
-    private int helper(int[][] dp, int amount, int[] coins, int i, int curSum) {
-        if (curSum == amount) {
-            return 1;
+
+    private int helper(int[][] dp, int[] coins, int remaining, int index) {
+        if (index >= coins.length) {
+            if (remaining == 0) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
         }
-        if (i >= coins.length || curSum > amount) {
-            return 0;
+        
+        if (dp[index][remaining] != -1) {
+            return dp[index][remaining];
         }
-        if (dp[i][curSum] != -1) {
-            return dp[i][curSum];
-        }
-        int take = helper(dp, amount, coins, i, curSum+coins[i]);
-        int leave = helper(dp, amount, coins, i+1, curSum);
-        return dp[i][curSum] = take + leave;
+
+        int take = 0;
+        if (coins[index] <= remaining)
+            take = helper(dp, coins, remaining-coins[index], index);
+        int leave = helper(dp, coins, remaining, index+1);
+        return dp[index][remaining] = take + leave;
+
     }
 
     public int change(int amount, int[] coins) {
-        int[][] dp = new int[coins.length][5001];
+        int[][] dp = new int[301][5001]; //index, amount
         for (int[] arr : dp) {
             Arrays.fill(arr, -1);
         }
-        return helper(dp, amount, coins, 0, 0);
+        return helper(dp, coins, amount, 0);
     }
 }
