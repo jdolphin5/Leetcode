@@ -12,50 +12,46 @@ class Solution {
         }
     }
 
-    private int digitDp(int[][][][] dp, String a, int index, int eq, int limit, int sum) {
-        if (dp[index][eq][limit][sum] != -1) {
-            return dp[index][eq][limit][sum];
-        }
+    private int digitDp(int[][][][] dp, String a, int index, int limit, int isZero, int lastDigit) {
         if (index == a.length()) {
-            if (eq == 1) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
+            if (isZero == 1) return 0;
+            return 1;
+        }
+        if (dp[index][limit][isZero][lastDigit+1] != -1) {
+            return dp[index][limit][isZero][lastDigit+1];
         }
 
         int ret = 0;
-        for (int i = 0; i < 10; i++) {
-            if (sum == 0 && i > a.charAt(index) - '0') {
-                continue;
-            }
-            else if (eq == 1 && Math.abs(limit - i) != 1) {
-                continue;
-            }
-            int limit1 = limit;
-            if (i != 0) {
-                limit1 = 1;
-            }
-            int sum1 = sum;
-            if (i != a.charAt(index) - '0') {
-                sum1 = 1;
-            }
-            //System.out.println("index+1: " + (index+1) + "limit1: " + limit1 + " i : " + i + " sum1: " + sum1);
-            ret += digitDp(dp, a, index+1, limit1, i, sum1);
-            ret %= MOD;
 
+        for (int i = 0; i < 10; i++) {
+            int nextZero = 0;
+            int nextLimit = 0;
+            if (isZero == 1 && i == 0) {
+                nextZero = 1;
+            }
+            if (limit == 1 && i == a.charAt(index)-'0') {
+                nextLimit = 1;
+            }
+            if (limit == 1 && i > a.charAt(index)-'0') {
+                continue;
+            }
+            if (isZero == 1 || (Math.abs(lastDigit - i) == 1)) {
+                ret = (ret + digitDp(dp, a, index+1, nextLimit, nextZero, i)) % MOD;
+            }
         }
-        return dp[index][eq][limit][sum] = ret;
+
+        return dp[index][limit][isZero][lastDigit+1] = ret;
+
         
     }
 
     public int countSteppingNumbers(String low, String high) {
-        int[][][][] dp = new int[101][2][10][2];
+        int[][][][] dp = new int[high.length()][2][2][11];
         resetDp(dp);
-        int ret = digitDp(dp, high, 0, 0, 0, 0);
+        //call dp function with limit = 1, isZero = 1, prevDigit = -1
+        int ret = digitDp(dp, high, 0, 1, 1, -1);
         resetDp(dp);
-        ret -= digitDp(dp, low, 0, 0, 0, 0);
+        ret -= digitDp(dp, low, 0, 1, 1, -1);
         if (ret < 0) {
             ret += MOD; 
         }
