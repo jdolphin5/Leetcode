@@ -9,7 +9,7 @@ class Solution {
         if (i < a.length() && a.charAt(i)-'0' == lastDigit) {
             l++;
         }
-        //if it doesn't
+        //if it doesn't OR i == a.length() => last index of a already checked
         //add l and add last Digit, set l (count of lastDigit to 1)
         else {
             if (l > 0) {
