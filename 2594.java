@@ -1,7 +1,7 @@
 class Solution {
     // n cars in (r * n^2) minutes
     // e.g. r = 4 can do 1 car in 4 minutes or 2 cars in 16 minutes
-    // ==> in x minutes he can do 2 cars (sqrt(16/4))
+    // ==> in x minutes he can do cars (sqrt(x/4))
     // ==> can do sqrt(minutes/r) cars
 
     private boolean canRepair(long minutes, int[] ranks, int cars) {
