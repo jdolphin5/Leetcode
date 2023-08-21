@@ -17,29 +17,19 @@ class Solution {
             char c = textA.charAt(i);
             char d = textB.charAt(i);
 
+            if (c == b) {
+                textACount += aACount;
+            }
             if (c == a) {
                 aACount++;
             }
-            else if (c == b) {
-                textACount += aACount;
+
+            if (d == b) {
+                textBCount += bACount;
             }
-            
             if (d == a) {
                 bACount++;
             }
-            else if (d == b) {
-                textBCount += bACount;
-            }
-        }
-
-        if (a == b) {
-            long ret = 0;
-            
-            for (int x = aACount-1; x > 0; x--) {
-                ret += x;
-            }
-
-            return ret;
         }
 
         return Math.max(textACount, textBCount);
