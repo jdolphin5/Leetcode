@@ -1,12 +1,12 @@
 class Solution {
     public String predictPartyVictory(String senate) {
         String[] res = new String[] {"Radiant", "Dire"};
-
         LinkedList<Integer> rQ = new LinkedList<>();
         LinkedList<Integer> dQ = new LinkedList<>();
 
         for (int i = 0; i < senate.length(); i++) {
             char c = senate.charAt(i);
+
             if (c == 'R') {
                 rQ.offer(1);
             }
@@ -19,6 +19,7 @@ class Solution {
         while (true) {
             for (int i = 0; i < check.length(); i++) {
                 char c = check.charAt(i);
+
                 if (c == 'R') {
                     dQ.poll();
                     if (check.substring(i, check.length()).contains("D"))
@@ -33,6 +34,7 @@ class Solution {
                     else
                         check = check.replaceFirst("R", "X");
                 }
+
                 if (dQ.isEmpty()) {
                     return res[0];
                 }
