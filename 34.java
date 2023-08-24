@@ -4,6 +4,7 @@ class Solution {
         int upper = nums.length;
 
         int index = -1;
+
         while (lower < upper) {
             int mid = lower + (upper - lower) / 2;
 
@@ -18,12 +19,14 @@ class Solution {
                 upper = mid;
             }
         }
+
         if (index == -1) {
             return new int[] {-1, -1};
         }
 
         int i = index;
         int j = index;
+        
         while (i-1 >= 0 && nums[i-1] == target) {
             i--;
         }
