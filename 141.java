@@ -11,18 +11,18 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        ListNode hashStart = head;
-        HashMap cycle = new HashMap<Integer, ListNode>();
-        int i = 0;
-        while (hashStart != null && hashStart.next != null) {
-            cycle.put(i, hashStart);
-            i++;
-            hashStart = hashStart.next;
-            //if value in hash equals hashStart.next, return true;
-            if (cycle.containsValue(hashStart)) {
+        Set<ListNode> mySet = new HashSet<>();
+
+        while (head != null) {
+            if (mySet.contains(head)) {
                 return true;
             }
+            else {
+                mySet.add(head);
+                head = head.next;
+            }
         }
+
         return false;
     }
 }
