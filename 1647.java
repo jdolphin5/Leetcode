@@ -1,30 +1,27 @@
 class Solution {
     public int minDeletions(String s) {
-        int ret = 0;
+        Set<Integer> freqSet = new HashSet<>();
         int[] bucket = new int[26];
+        int count = 0;
+
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            bucket[c-'a']++;
+            bucket[s.charAt(i)-'a']++;
         }
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
-        for (int num : bucket) {
-            if (num > 0) {
-                pq.offer(num);
-            }
-        }
-        int last = 0;
-        while (!pq.isEmpty()) {
-            int cur = (int)pq.poll();
-            if (cur == last) {
-                ret++;
-                if (cur > 1)
-                    pq.offer(cur-1);
-            }
-            else {
-                last = cur;
+
+        for (int i = 0; i < bucket.length; i++) {
+            if (bucket[i] > 0) {
+                int val = bucket[i];
+                
+                while (freqSet.contains(val)) {
+                    val--;
+                    count++;
+                }
+
+                if (val > 0)
+                    freqSet.add(val);
             }
         }
 
-        return ret;
+        return count;
     }
 }
