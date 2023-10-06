@@ -1,19 +1,15 @@
 class Solution {
     public int countDigits(int num) {
-        List<Integer> digits = new ArrayList<>();
-        int res = 0;
+        int count = 0;
+        int num2 = num;
 
-        int nums = num;
-        while (nums > 0) {
-            digits.add(nums % 10);
-            nums /= 10;
-        }
-        for (int i : digits) {
-            if (num % i == 0) {
-                res++;
+        while (num2 != 0) {
+            if (num % (num2 % 10) == 0) {
+                count++;
             }
+            num2 /= 10;
         }
 
-        return res;
+        return count;
     }
 }
