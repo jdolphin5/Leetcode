@@ -1,48 +1,28 @@
 class Solution {
     public boolean backspaceCompare(String s, String t) {
-
-        char[] sArray = s.toCharArray();
-        char[] tArray = t.toCharArray();
-
-        Stack<Character> sStack = new Stack<Character>();
-        Stack<Character> tStack = new Stack<Character>();
-
-        int i = 0;
-        while (i < sArray.length) {
-            if (sArray[i] == '#') {
-                if (!sStack.isEmpty()) {
-                    sStack.pop();
-                }
+        StringBuilder sRet = new StringBuilder();
+        StringBuilder tRet = new StringBuilder();
+        
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c != '#') {
+                sRet.append(c);
             }
-            else {
-                sStack.push(sArray[i]);
-            }
-            i++;
-        }
-
-        int j = 0;
-        while (j < tArray.length) {
-            if (tArray[j] == '#') {
-                if (!tStack.isEmpty()) {
-                    tStack.pop();
-                }
-            }
-            else {
-                tStack.push(tArray[j]);
-            }
-            j++;
-        }
-
-        while(!sStack.isEmpty() && !tStack.isEmpty()) {
-            if (sStack.peek() != tStack.peek()) return false;
-            else {
-                System.out.println(sStack.peek());
-                System.out.println(tStack.peek());
-                sStack.pop();
-                tStack.pop();
+            else if (sRet.length() > 0) {
+                sRet.deleteCharAt(sRet.length()-1);
             }
         }
-        if (sStack.isEmpty() && tStack.isEmpty()) return true;
-        return false;
+
+        for (int i = 0; i < t.length(); i++) {
+            char c = t.charAt(i);
+            if (c != '#') {
+                tRet.append(c);
+            }
+            else if (tRet.length() > 0) {
+                tRet.deleteCharAt(tRet.length()-1);
+            }
+        }
+
+        return sRet.toString().equals(tRet.toString());
     }
 }
