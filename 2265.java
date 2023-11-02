@@ -16,10 +16,10 @@
 class Solution {
     public class TreeNodePair {
         int val;
-        int sumOfNodesInSubtree;
-        int countOfNodesInSubtree;
         TreeNodePair left;
         TreeNodePair right;
+        int sumOfNodesInSubtree;
+        int countOfNodesInSubtree;
 
         public TreeNodePair(int val, TreeNodePair left, TreeNodePair right, int sumOfNodesInSubtree, int countOfNodesInSubtree) {
             this.val = val;
