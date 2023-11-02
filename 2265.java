@@ -16,17 +16,19 @@
 class Solution {
     public class TreeNodePair {
         int val;
-        TreeNodePair left;
-        TreeNodePair right;
         int sumOfNodesInSubtree;
         int countOfNodesInSubtree;
+        TreeNodePair left;
+        TreeNodePair right;
+        int numOfAverageEqualInSubtree;
 
-        public TreeNodePair(int val, TreeNodePair left, TreeNodePair right, int sumOfNodesInSubtree, int countOfNodesInSubtree) {
+        public TreeNodePair(int val, TreeNodePair left, TreeNodePair right, int sumOfNodesInSubtree, int countOfNodesInSubtree, int numOfAverageEqualInSubtree) {
             this.val = val;
             this.left = left;
             this.right = right;
             this.sumOfNodesInSubtree = sumOfNodesInSubtree;
             this.countOfNodesInSubtree = countOfNodesInSubtree;
+            this.numOfAverageEqualInSubtree = numOfAverageEqualInSubtree;
         }
     }
 
@@ -37,6 +39,7 @@ class Solution {
 
         int totalNodesInSubtree = 1;
         int sum = root.val;
+        int count = 0;
 
         TreeNodePair left = populateTreeNodePairs(root.left);
         TreeNodePair right = populateTreeNodePairs(root.right);
@@ -44,36 +47,23 @@ class Solution {
         if (left != null) {
             sum += left.sumOfNodesInSubtree;
             totalNodesInSubtree += left.countOfNodesInSubtree;
+            count += left.numOfAverageEqualInSubtree;
         }
 
         if (right != null) {
             sum += right.sumOfNodesInSubtree;
             totalNodesInSubtree += right.countOfNodesInSubtree;
+            count += right.numOfAverageEqualInSubtree;
         }
 
-        return new TreeNodePair(root.val, left, right, sum, totalNodesInSubtree);
-    }
+        count += sum / totalNodesInSubtree == root.val ? 1 : 0;
 
-    private int traverseForResult(TreeNodePair rootTreeNodePair) {
-        if (rootTreeNodePair == null) {
-            return 0;
-        }
-
-        int ret = 0;
-
-        int left = traverseForResult(rootTreeNodePair.left);
-        int right = traverseForResult(rootTreeNodePair.right);
-
-        if (rootTreeNodePair.sumOfNodesInSubtree/rootTreeNodePair.countOfNodesInSubtree == rootTreeNodePair.val) {
-            ret++;
-        }
-
-        return ret + left + right;
+        return new TreeNodePair(root.val, left, right, sum, totalNodesInSubtree, count);
     }
 
     public int averageOfSubtree(TreeNode root) {
         TreeNodePair rootTreeNodePair = populateTreeNodePairs(root);
 
-        return traverseForResult(rootTreeNodePair);
+        return rootTreeNodePair.numOfAverageEqualInSubtree;
     }
 }
