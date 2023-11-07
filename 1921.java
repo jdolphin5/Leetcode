@@ -1,5 +1,6 @@
 class Solution {
     public int eliminateMaximum(int[] dist, int[] speed) {
+        //t = d/s
         double[] timeToReachCity = new double[dist.length];
 
         for (int i = 0; i < dist.length; i++) {
@@ -8,19 +9,16 @@ class Solution {
 
         Arrays.sort(timeToReachCity);
 
-        int ct = 0;
+        int i = 1;
 
-        for (double num : timeToReachCity) {
-            if ((int) num < ct) {
-                return ct;
+        while (i < timeToReachCity.length) {
+            if ((double)i >= timeToReachCity[i]) {
+                return i;
             }
-            if (num % 1 == 0.0 && (int) num == ct) {
-                return ct;
-            }
-            
-            ct++;
+
+            i++;
         }
 
-        return ct;
+        return i;
     }
 }
