@@ -10,6 +10,8 @@ class Solution {
             return;
         }
 
+        if (!ret.equals("")) return;
+
         String curCopy1 = cur + "0";
         String curCopy2 = cur + "1";
 
