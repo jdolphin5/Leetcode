@@ -20,7 +20,7 @@ class Solution {
             int x2 = point[1];
 
             for (Interval interval : curIntervals) {
-                if (interval.end >= x) { //interval.start <= x2 && 
+                if (interval.end >= x) { //interval.start <= x2 - sorting confirms this condition
                     interval.start = Math.max(interval.start, x);
                     interval.end = Math.min(interval.end, x2);
                     intervalFound = true;
