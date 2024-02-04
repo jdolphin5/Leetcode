@@ -21,6 +21,11 @@ class Solution {
         
         for (int i = 0; i < groupList.size(); i++) {
             for (int j = 0; j < groupList.get(i).size(); j++) {
+                if (indexToGroupMap.get(nums[groupList.get(i).get(j)]) != null) {
+                    if (indexToGroupMap.get(nums[groupList.get(i).get(j)]) != i) {
+                        return false;
+                    }
+                }
                 indexToGroupMap.put(nums[groupList.get(i).get(j)], i);
             }
         }
