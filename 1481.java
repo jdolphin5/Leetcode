@@ -1,36 +1,40 @@
 class Solution {
     public int findLeastNumOfUniqueInts(int[] arr, int k) {
         Map<Integer, Integer> numCountMap = new HashMap<>();
+        TreeMap<Integer, Integer> myTreeMap = new TreeMap<>();
+        int countOfNumbers = 0;
+
         for (int num : arr) {
             numCountMap.put(num, numCountMap.getOrDefault(num, 0) + 1);
         }
-        int ret = numCountMap.size();
-        int[] bucket = new int[10001];
-        if (k == 0) return ret;
 
         for (Map.Entry<Integer, Integer> entry : numCountMap.entrySet()) {
-            int key = entry.getKey();
-            int count = entry.getValue();
-            bucket[count]++;
+            myTreeMap.put(entry.getValue(), myTreeMap.getOrDefault(entry.getValue(), 0) + 1);
+            countOfNumbers++;
         }
 
-        outerloop:
-        for (int i = 0; i < bucket.length; i++) {
-            if (bucket[i] > 0) {
-                for (int j = bucket[i]; j > 0; j--) {
-                    for (int x = 0; x < i; x++) {
-                        //System.out.println("i: " + i + " j : " + j + " x: " + x);
-                        k--;
-                        if (k == 0 && x != i-1) break outerloop;
-                    }
-                    ret--;
-                    if (k == 0) break outerloop;
+        boolean cont = true;
+
+        while (cont) {
+            cont = false;
+            int x = Integer.MAX_VALUE;
+            
+            if (myTreeMap.size() > 0)
+                x = myTreeMap.firstKey();
+
+            if (k >= x) {
+                cont = true;
+                k -= x;
+                myTreeMap.put(x, myTreeMap.get(x) - 1);
+                
+                if (myTreeMap.get(x) == 0) {
+                    myTreeMap.remove(x);
                 }
+
+                countOfNumbers--;
             }
         }
 
-
-        return ret;
-        
+        return countOfNumbers;
     }
 }
