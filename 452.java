@@ -1,38 +1,25 @@
 class Solution {
-    public class Interval {
-        int start;
-        int end;
-
-        public Interval(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-    }
-
     public int findMinArrowShots(int[][] points) {
-        List<Interval> curIntervals = new ArrayList<>();
-        Arrays.sort(points, (p1, p2) -> Integer.compare(p1[0], p2[0]));
+        int ret = 1;
 
-        for (int[] point : points) {
-            boolean intervalFound = false;
+        //need Integer.compare() instead of a[0] - b[0] comparator due to overflow of Integer.MIN_VALUE - Integer.MAX_VALUE
+        Arrays.sort(points, (a, b) -> Integer.compare(a[0], b[0]));
 
-            int x = point[0];
-            int x2 = point[1];
+        int min = points[0][0];
+        int max = points[0][1];
 
-            for (Interval interval : curIntervals) {
-                if (interval.end >= x) { //interval.start <= x2 - sorting confirms this condition
-                    interval.start = Math.max(interval.start, x);
-                    interval.end = Math.min(interval.end, x2);
-                    intervalFound = true;
-                    break;
-                }
+        for (int i = 1; i < points.length; i++) {
+            if (points[i][1] >= min && points[i][0] <= max) {
+                min = Math.max(min, points[i][0]);
+                max = Math.min(max, points[i][1]);
             }
-
-            if (!intervalFound) {
-                curIntervals.add(new Interval(x, x2));
+            else {
+                min = points[i][0];
+                max = points[i][1];
+                ret++;
             }
         }
 
-        return curIntervals.size();
+        return ret;
     }
 }
