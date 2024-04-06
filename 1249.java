@@ -1,6 +1,6 @@
 class Solution {
     public String minRemoveToMakeValid(String s) {
-        Set<Integer> removeSet = new HashSet<>();
+        boolean[] invalidCharArr = new boolean[s.length()];
         Stack<Integer> myStack = new Stack<>();
 
         for (int i = 0; i < s.length(); i++) {
@@ -14,19 +14,19 @@ class Solution {
                     myStack.pop();
                 }
                 else {
-                    removeSet.add(i);
+                    invalidCharArr[i] = true;
                 }
             }
         }
 
         while (!myStack.isEmpty()) {
-            removeSet.add(myStack.pop());
+            invalidCharArr[myStack.pop()] = true;
         }
 
         StringBuilder ret = new StringBuilder();
 
         for (int i = 0; i < s.length(); i++) {
-            if (!removeSet.contains(i))
+            if (!invalidCharArr[i])
                 ret.append(s.charAt(i));
         }
 
