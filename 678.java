@@ -25,9 +25,6 @@ class Solution {
             }
         }
 
-        if (leftStack.isEmpty())
-            return true;
-
         if (asteriskStack.size() < leftStack.size())
             return false;
 
