@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     private int recur(int target, int[][] types, Integer[][] dp, int i) {
         final int MOD = 1000000007;
         
@@ -33,6 +33,4 @@ public class Solution {
 
         return recur(target, types, dp, 0);
     }
-} 2585 {
-    
 }
