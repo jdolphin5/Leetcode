@@ -1,21 +1,23 @@
 class Solution {
-    
     public int longestPalindrome(String s) {
-        Map<Character, Integer> map = new HashMap();
-        for(char myChar: s.toCharArray()) {
-            map.put(myChar, map.getOrDefault(myChar, 0) + 1);
+        int[] bucket = new int[100];
+
+        for (int i = 0; i < s.length(); i++) {
+            bucket[s.charAt(i)-'A']++;
         }
 
-        int result = 0;
-        boolean odd = false;
-        for(int count: map.values()) {
-            if (count % 2 == 0) result += count;
-            else {
-                odd = true;
-                result += count - 1;
+        boolean oddExists = false;
+        int evenCt = 0;
+
+        for (int i = 0; i < bucket.length; i++) {
+            if (bucket[i] % 2 == 1) {
+                oddExists = true;
             }
+
+            //minus one from the ct if the ct is odd
+            evenCt += (bucket[i] / 2) * 2;
         }
-        if (odd) result++;
-        return result;
+
+        return oddExists ? evenCt + 1 : evenCt;
     }
 }
