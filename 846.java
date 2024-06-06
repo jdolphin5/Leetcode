@@ -1,31 +1,46 @@
 class Solution {
-    public boolean isNStraightHand(int[] hand, int groupSize) {
-        TreeMap<Integer, Integer> cardValueCountTreeMap = new TreeMap<>();
-        int cardCount = 0;
-
-        for (int num : hand) {
-            cardValueCountTreeMap.put(num, cardValueCountTreeMap.getOrDefault(num, 0) + 1);
-            cardCount++;
+    private boolean recur(int[] hand, int groupSize, int i, int offset, int size) {
+        if (i == hand.length) {
+            if (offset < groupSize)
+                return false;
+            return true;
         }
 
-        if (cardCount % groupSize != 0) return false;
-
-        while(true) {
-            Integer minVal = cardValueCountTreeMap.firstKey();
-            int minValCount = cardValueCountTreeMap.get(minVal);
-            cardValueCountTreeMap.remove(minVal);
-
-            for (int i = 1; i < groupSize; i++) {
-                if (cardValueCountTreeMap.getOrDefault(minVal+i, 0) < minValCount)
+        if (offset < groupSize) {
+            if (hand[i] != size) {
+                if (!recur(hand, groupSize, i+1, offset, size)) {
                     return false;
-
-                cardValueCountTreeMap.put(minVal+i, cardValueCountTreeMap.get(minVal+i) - minValCount);
-
-                if (cardValueCountTreeMap.get(minVal+i) == 0)
-                    cardValueCountTreeMap.remove(minVal+i);
+                }
             }
 
-            if (cardValueCountTreeMap.size() == 0) return true;
+            else {
+                hand[i] = -1;
+
+                if (!recur(hand, groupSize, i+1, offset+1, size+1)) {
+                    return false;
+                }
+            }
         }
+
+        return true;
+    }
+
+    public boolean isNStraightHand(int[] hand, int groupSize) {
+        Arrays.sort(hand);
+
+        int j = 0;
+
+        while (j < hand.length) {
+            if (hand[j] >= 0) {
+                int size = hand[j];
+
+                if (!recur(hand, groupSize, j, 0, size))
+                    return false;
+            }
+
+            j++;
+        }
+
+        return true;
     }
 }
