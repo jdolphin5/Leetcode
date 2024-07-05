@@ -10,53 +10,36 @@
  */
 class Solution {
     public int[] nodesBetweenCriticalPoints(ListNode head) {
-        int twoBefore = -1;
-        int oneBefore = -1;
-        int index = 0;
-        int[] res = new int[2];
-        Arrays.fill(res, -1);
-        HashSet<Integer> mySet = new HashSet<>();
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
 
-        ListNode cur = head;
-        while (cur != null) {
-            if (twoBefore == -1) {
-                twoBefore = cur.val;
-            }
-            else if (oneBefore == -1) {
-                oneBefore = cur.val;
-            }
-            else {
-                if (twoBefore < oneBefore && cur.val < oneBefore) {
-                    mySet.add(index-1);
+        int cur = -1;
+        boolean first = false;
+        int last = -1;
+        int lastPrev = -1;
+
+        while (head != null) {
+            if (last != -1 && lastPrev != -1) {
+                if ((last > lastPrev && last > head.val) || (last < lastPrev && last < head.val)) {
+                    if (first) {
+                        min = Math.min(min, cur);
+                        max = Math.max(max + cur, cur);
+                    }
+                    first = true;
+                    cur = 0;
                 }
-                else if (twoBefore > oneBefore && cur.val > oneBefore) {
-                    mySet.add(index-1);
-                }
-
-                twoBefore = oneBefore;
-                oneBefore = cur.val;
             }
-            cur = cur.next;
-            index++;
+
+            lastPrev = last;
+            last = head.val;
+            if (cur >= 0) cur++;
+
+            head = head.next;
         }
 
-        Integer[] sortedArr = new Integer[mySet.size()];
-        mySet.toArray(sortedArr);
-        Arrays.sort(sortedArr);
-        
-        int minDiff = Integer.MAX_VALUE;
-        for (int i = 0; i < sortedArr.length-1; i++) {
-            if (sortedArr[i+1] - sortedArr[i] < minDiff) {
-                minDiff = sortedArr[i+1] - sortedArr[i];
-            }
-        }
+        min = min == Integer.MAX_VALUE ? -1 : min;
+        max = max == Integer.MIN_VALUE ? -1 : max;
 
-        if (sortedArr.length >= 2) {
-            res[0] = minDiff;
-            res[1] = sortedArr[sortedArr.length-1] - sortedArr[0];
-        }
-
-
-        return res;
+        return new int[] { min, max };
     }
 }
