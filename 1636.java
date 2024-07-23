@@ -1,33 +1,31 @@
 class Solution {
     public int[] frequencySort(int[] nums) {
-        Map<Integer, Integer> myMap = new HashMap<>();
-        List<Integer> myList = new ArrayList<>();
-        int[] result = new int[nums.length];
-        int p = 0;
+        int[] bucket = new int[201];
 
-        for (int i = 0; i < nums.length; i++) {
-            myMap.put(nums[i], myMap.getOrDefault(nums[i], 0) + 1);
+        for (int num : nums) {
+            bucket[num+100]++;
         }
-        for (int x = 1; x < 101; x++) {
-            for (Map.Entry<Integer, Integer> entry : myMap.entrySet()) {
-                Integer key = entry.getKey();
-                Integer value = entry.getValue();
-                if (value == x) {
-                    for (int b = 0; b < x; b++) {
-                        myList.add(key);
-                    }
+
+        int[] ret = new int[nums.length];
+        int x = 0;
+
+        for (int i = 1; i < 101; i++) {
+            List<Integer> myList = new ArrayList<>();
+
+            for (int j = 0; j < 201; j++) {
+                if (bucket[j] == i) {
+                    myList.add(j);
                 }
             }
+
             Collections.sort(myList, Collections.reverseOrder());
-            for (int c = 0; c < myList.size(); c++) {
-                result[p] = myList.get(c);
-                p++;
+            
+            for (int num : myList) {
+                for (int p = 0; p < i; p++)
+                    ret[x++] = num-100;
             }
-            myList.clear();
         }
 
-        return result;
-        
-
+        return ret;
     }
 }
