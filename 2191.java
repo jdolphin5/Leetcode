@@ -1,34 +1,56 @@
-public class Solution {
-    public int[] sortJumbled(int[] mapping, int[] nums) {
-        int[][] mappedArr = new int[nums.length][2];
+class Solution {
+    public class MappedNumber {
+        int original;
+        int mapped;
 
-        for (int i = 0; i < nums.length; i++) {
-            int mappedNum = 0;
-            int j = 1;
+        public MappedNumber (int original, int mapped) {
+            this.original = original;
+            this.mapped = mapped;
+        }
+    }
 
-            mappedArr[i][1] = nums[i];
+    private MappedNumber mapNumber(int[] mapping, int num) {
+        int[] mappedNumberArr = new int[mapping.length];
+        int original = num;
 
-            if (nums[i] == 0) {
-                mappedArr[i][0] = mapping[0];
-                continue;
-            }
-
-            while (nums[i] > 0) {
-                int cur = nums[i] % 10;
-                mappedNum += j * mapping[cur];
-                nums[i] /= 10;
-                j *= 10;
-            }
-
-            mappedArr[i][0] = mappedNum;
+        if (num == 0) {
+            return new MappedNumber(original, mapping[0]);
         }
 
-        Arrays.sort(mappedArr, (a, b) -> a[0] - b[0]);
+        int i = mapping.length-1;
+        while (num > 0) {
+            int x = num % 10;
+            mappedNumberArr[i--] = mapping[x];
+            num /= 10;
+        }
+
+        //System.out.println(Arrays.toString(mappedNumberArr));
+
+        int ret = 0;
+        int x = 0;
+
+        for (int j = mappedNumberArr.length - 1; j >= 0; j--) {
+            ret += Math.pow(10, x++) * mappedNumberArr[j];
+        }
+
+        //System.out.println("original: " + original + " ret: " + ret);
+
+        return new MappedNumber(original, ret);
+    }
+
+    public int[] sortJumbled(int[] mapping, int[] nums) {
+        MappedNumber[] mappedArr = new MappedNumber[nums.length];
+
+        for (int i = 0; i < mappedArr.length; i++) {
+            mappedArr[i] = mapNumber(mapping, nums[i]);
+        }
+
+        Arrays.sort(mappedArr, (a, b) -> a.mapped - b.mapped);
 
         int[] ret = new int[nums.length];
 
-        for (int i = 0; i < mappedArr.length; i++) {
-            ret[i] = mappedArr[i][1];
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = mappedArr[i].original;
         }
 
         return ret;
