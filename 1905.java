@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     private int checkIsland(int i, int j, int[][] grid1, int[][] grid2, int m, int n) {
         if (i < 0 || j < 0 || i >= m || j >= n || grid2[i][j] == 0) {
             return 0;
@@ -38,6 +38,4 @@ public class Solution {
 
         return ret;
     }
-} 1905 {
-    
 }
