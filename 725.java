@@ -10,48 +10,49 @@
  */
 class Solution {
     public ListNode[] splitListToParts(ListNode head, int k) {
-        int size = 0;
-        ListNode cur = head;
-        ListNode[] ret = new ListNode[k];
-        
-        while (cur != null) { 
-            size++;
-            cur = cur.next;
+        int len = 0;
+
+        ListNode headCopy = head;
+
+        while (headCopy != null) {
+            len++;
+            headCopy = headCopy.next;
         }
 
-        int baseSizeEach = size / k;
-        int rem = size % k;
+        int subLen = len / k;
+        int modRem = len % k;
 
+        ListNode[] ret = new ListNode[k];
         int i = 0;
         int j = 0;
-        int offset = 0;
-        
-        while (i < k) {
-            ListNode myListNode = new ListNode();
-            ListNode myListNodeHead = new ListNode(0);
-            myListNodeHead = myListNode;
+        ListNode newNode = null;
 
-            while ((j == (i+1) * baseSizeEach + offset && rem >= 1) || (j < (i+1) * baseSizeEach + offset) && head != null) {
-                if (j == (i+1) * baseSizeEach + offset && rem >= 1) {
-                    offset++;
-                    myListNode.next = new ListNode(head.val);
-                    head = head.next;
-                    myListNode = myListNode.next;
-                    j++;
-                    rem--;
-                    break;
+        while (head != null) {
+            if (j < subLen || (j == subLen && modRem > 0)) {
+                if (newNode == null) {
+                    newNode = new ListNode(head.val);
+                    ret[i] = newNode;
+                }
+                else if (j < subLen) {
+                    newNode.next = new ListNode(head.val);
+                    newNode = newNode.next;
+                }
+                else if (j == subLen) {
+                    newNode.next = new ListNode(head.val);
+                    newNode = newNode.next;
+                    modRem--;
                 }
 
-                myListNode.next = new ListNode(head.val);
-                head = head.next;
-                myListNode = myListNode.next;
                 j++;
+                head = head.next;
             }
-
-            ret[i] = myListNodeHead.next;
-            i++;
+            else {
+                i++;
+                j = 0;
+                newNode = null;
+            }
         }
-        
+
         return ret;
     }
 }
