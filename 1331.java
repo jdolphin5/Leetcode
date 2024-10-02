@@ -1,17 +1,7 @@
 class Solution {
-    public class Tuple {
-        int val;
-        int index;
-
-        public Tuple(int val, int index) {
-            this.val = val;
-            this.index = index;
-        }
-    }
-
     public int[] arrayRankTransform(int[] arr) {
         int[] copyArr = new int[arr.length];
-        
+
         for (int i = 0; i < arr.length; i++) {
             copyArr[i] = arr[i];
         }
@@ -27,7 +17,7 @@ class Solution {
                 continue;
             }
 
-            valueToRankMap.put(copyArr[i], i+1-offset);
+            valueToRankMap.put(copyArr[i], i + 1 - offset);
             last = copyArr[i];
         }
 
